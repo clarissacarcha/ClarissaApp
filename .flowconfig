@@ -1,0 +1,86 @@
+[ignore]
+; We fork some components by platform
+.*/*[.]android.js
+
+; Ignore "BUCK" generated dirs
+<PROJECT_ROOT>/\.buckd/
+
+; Ignore polyfills
+node_modules/react-native/Libraries/polyfills/.*
+
+; Ignore pager view
+.*/node_modules/react-native-pager-view/lib/typescript/.*
+.*/node_modules/react-native/Libraries/Animated/.*
+
+; Ignore eslint
+.*/node_modules/eslint-plugin-react/node_modules/resolve/test/resolver/.*
+
+; Ignore test
+.*/node_modules/resolve/test/resolver/malformed_package_json/.*
+
+; Ignore fbjs
+.*/node_modules/fbjs/.*
+
+; Ignore react-addons-shallow-compare
+.*/node_modules/react-addons-shallow-compare/.*
+
+; These should not be required directly
+; require from fbjs/lib instead: require('fbjs/lib/warning')
+node_modules/warning/.*
+./node_modules/.*
+.*/node_modules/react-native/Libraries/StyleSheet/.*
+; Flow doesn't support platforms
+.*/Libraries/Utilities/LoadingView.js
+
+; Ignore coverage report
+./coverage
+
+[untyped]
+.*/node_modules/@react-native-community/cli/.*/.*
+
+[include]
+
+[libs]
+
+[options]
+emoji=true
+
+module.name_mapper='^src/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+module.file_ext=.js
+module.file_ext=.ts
+module.file_ext=.json
+module.file_ext=.ios.js
+
+munge_underscores=true
+
+module.name_mapper='^@src/\(.*\)$' -> '<PROJECT_ROOT>/src/\1'
+
+module.name_mapper='^react-native/\(.*\)$' -> '<PROJECT_ROOT>/node_modules/react-native/\1'
+module.name_mapper='^@?[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> '<PROJECT_ROOT>/node_modules/react-native/Libraries/Image/RelativeImageStub'
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FlowFixMeProps
+suppress_type=$FlowFixMeState
+
+[lints]
+sketchy-null-number=warn
+sketchy-null-mixed=warn
+sketchy-number=warn
+untyped-type-import=warn
+nonstrict-import=warn
+deprecated-type=warn
+unsafe-getters-setters=warn
+unnecessary-invariant=warn
+; signature-verification-failure=warn
+; deprecated-utility=error
+
+[strict]
+deprecated-type
+nonstrict-import
+sketchy-null
+unclear-type
+unsafe-getters-setters
+untyped-import
+untyped-type-import
