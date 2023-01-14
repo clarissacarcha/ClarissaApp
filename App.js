@@ -1,30 +1,39 @@
 // @flow
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar, LogBox, View, StyleSheet} from 'react-native';
-import {getStatusbarHeight, moderateScale} from 'src/helper';
-import {default as Nav} from 'src/nav';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import SplashScreen from 'react-native-splash-screen';
+//NAV
+import {default as Nav} from 'src/nav';
+//REDUX
+import store from './src/reducers/store';
+import {Provider} from 'react-redux';
 
 LogBox.ignoreAllLogs();
 
 const App = (): React$Element<React$FragmentType> => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
   return (
-    <SafeAreaProvider>
-      <StatusBar
-        barStyle="dark-content"
-        translucent
-        backgroundColor="transparent"
-      />
-      <View style={styles.container}>
-        <Nav />
-      </View>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <StatusBar
+          barStyle="dark-content"
+          translucent
+          backgroundColor="transparent"
+        />
+        <View style={styles.container}>
+          <Nav />
+        </View>
+      </SafeAreaProvider>
+    </Provider>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: moderateScale(getStatusbarHeight),
     flex: 1,
   },
 });

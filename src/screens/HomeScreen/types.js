@@ -2,4 +2,7 @@
  * @flow
  */
 
-export type PropsType = {};
+export type PropsType = {
+  getHotelsNearYouDispatch: any,
+  hotelsNearby: any,
+};
