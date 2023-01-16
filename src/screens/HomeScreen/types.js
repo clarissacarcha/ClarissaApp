@@ -4,5 +4,5 @@
 
 export type PropsType = {
   getHotelsNearYouDispatch: any,
-  hotelsNearby: any,
+  hotels: any,
 };

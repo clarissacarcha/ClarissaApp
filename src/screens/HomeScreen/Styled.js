@@ -5,29 +5,30 @@
 import type {ComponentType} from 'react';
 import styled from 'styled-components/native';
 import {FlatGrid} from 'react-native-super-grid';
-import {Text, TouchableOpacity, Image, ImageBackground} from 'react-native';
+import {Text, TouchableOpacity, ImageBackground} from 'react-native';
 //HELPER
-import {getStatusbarHeight, moderateScale} from 'src/helper';
+import {moderateScale} from 'src/helper';
 
 export const Container: ComponentType<any> = styled.View`
   flex: 1;
-  background-color: #fff;
-  padding-top: ${moderateScale(getStatusbarHeight)};
+  background-color: #f4faff;
 `;
 export const Title: ComponentType<any> = styled(Text).attrs(props => ({
   ...props,
   numberOfLines: 2,
 }))`
-  color: black;
+  color: #373737;
   font-weight: bold;
-  margin-horizontal: 16px;
-  font-size: 15;
+  margin-horizontal: ${moderateScale(16)}px;
+  font-size: ${moderateScale(15)}px;
+  margin-top: ${moderateScale(16)}px;
+  margin-bottom: ${moderateScale(10)}px;
 `;
 export const GridContainer: ComponentType<any> = styled(FlatGrid).attrs(
   props => ({
     ...props,
-    itemDimension: 150,
-    spacing: 16,
+    itemDimension: moderateScale(150),
+    spacing: moderateScale(16),
   }),
 )`
   flex: 1;
@@ -37,7 +38,7 @@ export const ContentContainer: ComponentType<any> = styled(
 ).attrs(props => ({
   ...props,
 }))`
-  border-radius: 10px;
+  border-radius: ${moderateScale(10)}px;
   elevation: 2;
   background-color: white;
   overflow: hidden;
@@ -49,15 +50,19 @@ export const BackgroundImage: ComponentType<any> = styled(
   source: {uri: props.backgroundImage},
   resizeMode: 'cover',
 }))`
-  height: 150px;
-  background-color: #5842ff20;
-  justify-content: center;
-  align-items: center;
+  height: ${moderateScale(150)}px;
+  justify-content: flex-end;
 `;
 export const HotelName: ComponentType<any> = styled(Text).attrs(props => ({
   ...props,
-  numberOfLines: 2,
+  numberOfLines: 1,
 }))`
   color: white;
   font-weight: bold;
+  padding: ${moderateScale(10)}px;
+  background-color: #1dbaa290;
+`;
+export const EmptyText: ComponentType<any> = styled.Text`
+  padding: ${moderateScale(10)}px;
+  text-align: center;
 `;

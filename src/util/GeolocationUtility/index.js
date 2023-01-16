@@ -1,23 +1,15 @@
-import React, {useState} from 'react';
 import Geolocation from 'react-native-geolocation-service';
-import {PermissionUtility} from '../../util';
 
 export class GeolocationUtility {
   // Get coordinates
   static getCurrentLocation = async () => {
     try {
-      const {granted, message} =
-        await PermissionUtility.getLocationPermission();
-
-      console.log({granted});
-
       return new Promise((resolve, reject) => {
         Geolocation.getCurrentPosition(
           position => {
             resolve(position);
           },
           error => {
-            console.log({error});
             reject(error);
           },
           {

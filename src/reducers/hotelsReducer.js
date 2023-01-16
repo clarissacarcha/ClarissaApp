@@ -1,5 +1,6 @@
 const initialState = {
   hotelsNearYou: [],
+  hotelFacilities: [],
 };
 
 export default function hotelsReducer(state = initialState, action) {
@@ -38,13 +39,6 @@ export function getHotelsNearYou(params) {
         },
         url: '/list-by-map',
         params,
-        // params: {
-        //   arrival_date: '2023-01-14',
-        //   departure_date: '2023-01-15',
-        //   room_qty: '1',
-        //   guest_qty: '1',
-        //   bbox: '14.291283,14.948423,120.755688,121.136864',
-        // },
       },
     },
   };

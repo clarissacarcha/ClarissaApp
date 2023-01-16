@@ -7,6 +7,6 @@ module.exports = {
     },
   },
   rules: {
-    'no-nested-ternary': 'error',
+    'react-hooks/exhaustive-deps': 0,
   },
 };

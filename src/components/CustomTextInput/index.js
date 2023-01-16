@@ -6,8 +6,7 @@
 import React from 'react';
 
 import type {PropsType} from './types';
-import {Error, Label, Input} from './Styled';
-import {View} from 'react-native';
+import {Label, Input, Container} from './Styled';
 
 export const CustomTextInput = (props: PropsType): React$Node => {
   const {
@@ -17,22 +16,12 @@ export const CustomTextInput = (props: PropsType): React$Node => {
     value,
     onChangeText,
     returnKeyType = 'done',
-    onSubmitEditing,
     keyboardType = 'default',
-    maxLength = null,
-    onBlur,
-    onFocus,
-    caretHidden,
-    editable = true,
-    errorMessage = '',
     label = '',
-    multiline = false,
-    numberOfLines,
-    textAlignVertical,
   } = props;
 
   return (
-    <View>
+    <Container>
       {label !== '' && <Label>{label}</Label>}
       <Input
         style={style}
@@ -42,19 +31,8 @@ export const CustomTextInput = (props: PropsType): React$Node => {
         placeholder={placeholder}
         placeholderTextColor={placeholderTextColor}
         returnKeyType={returnKeyType}
-        editable={editable}
-        maxLength={maxLength}
         keyboardType={keyboardType}
-        hasError={errorMessage !== ''}
-        onBlur={onBlur}
-        onSubmitEditing={onSubmitEditing}
-        onFocus={onFocus}
-        caretHidden={caretHidden}
-        multiline={multiline}
-        numberOfLines={numberOfLines}
-        textAlignVertical={textAlignVertical}
       />
-      {errorMessage !== '' && <Error>{errorMessage}</Error>}
-    </View>
+    </Container>
   );
 };
