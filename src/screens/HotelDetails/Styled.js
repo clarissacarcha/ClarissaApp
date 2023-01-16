@@ -28,7 +28,7 @@ export const HotelName: ComponentType<any> = styled.Text`
   flex-shrink: 1;
 `;
 export const Price: ComponentType<any> = styled.Text`
-  color: #373737;
+  color: #1dbaa2;
   font-size: ${moderateScale(20)}px;
   font-weight: bold;
 `;

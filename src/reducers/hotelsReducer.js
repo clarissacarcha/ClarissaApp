@@ -1,6 +1,5 @@
 const initialState = {
-  hotelsNearYou: [],
-  hotelFacilities: [],
+  hotelsNearYou: null,
 };
 
 export default function hotelsReducer(state = initialState, action) {
@@ -15,7 +14,7 @@ export default function hotelsReducer(state = initialState, action) {
       };
     case 'GET_HOTELS_NEAR_YOU_FAIL':
       let error = action.error.data ? action.error.data : action.error;
-      return {...state, isLoading: false, hotelsNearYou: error};
+      return {...state, isLoading: false, hotelsNearYou: {error}};
 
     case 'CLEAR_DATA':
       return initialState;

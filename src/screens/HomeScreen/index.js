@@ -3,7 +3,7 @@
  * @flow
  */
 
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import type {PropsType} from './types';
 import {
   Container,
@@ -17,7 +17,7 @@ import {
 import {GeolocationUtility} from 'src/util';
 import {getHotelsNearYou} from 'src/reducers/hotelsReducer';
 import {connect} from 'react-redux';
-import {SAMPLE_HOTELS, getBoundingBox} from 'src/helper';
+import {getBoundingBox} from 'src/helper';
 import {Header} from './components';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
@@ -96,31 +96,36 @@ const MainComponent = (props: PropsType): React$Node => {
     );
   }, [searchData]);
 
-  if (!hotels.isLoading && !!hotels?.hotelsNearYou?.code) {
-    return EmptyComponent(hotels?.hotelsNearYou?.message);
-  }
+  const displayContent = () => {
+    if (hotels?.isLoading || hotels.hotelsNearYou === null) {
+      return <ActivityIndicator color="#1dbaa2" />;
+    }
+    if (hotels?.hotelsNearYou?.error) {
+      return EmptyComponent(hotels?.hotelsNearYou?.error);
+    }
+    return (
+      <GridContainer
+        data={hotels?.hotelsNearYou?.result ? hotels.hotelsNearYou.result : []}
+        renderItem={({item}) => (
+          <ContentContainer
+            onPress={() =>
+              navigation.navigate('HotelDetails', {hotelDetails: item})
+            }>
+            <BackgroundImage backgroundImage={item.main_photo_url}>
+              <HotelName>{item.hotel_name}</HotelName>
+            </BackgroundImage>
+          </ContentContainer>
+        )}
+        ListEmptyComponent={EmptyComponent('There is no hotel near you.')}
+      />
+    );
+  };
+
   return (
     <Container>
       {displayHeaderSearch}
       <Title>Hotels Near You</Title>
-      {hotels?.isLoading ? (
-        <ActivityIndicator color="#1dbaa2" />
-      ) : (
-        <GridContainer
-          data={hotels.hotelsNearYou.result}
-          renderItem={({item}) => (
-            <ContentContainer
-              onPress={() =>
-                navigation.navigate('HotelDetails', {hotelDetails: item})
-              }>
-              <BackgroundImage backgroundImage={item.main_photo_url}>
-                <HotelName>{item.hotel_name}</HotelName>
-              </BackgroundImage>
-            </ContentContainer>
-          )}
-          ListEmptyComponent={EmptyComponent('There is no hotel near you.')}
-        />
-      )}
+      {displayContent()}
     </Container>
   );
 };
