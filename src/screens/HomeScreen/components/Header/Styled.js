@@ -4,7 +4,7 @@
 
 import type {ComponentType} from 'react';
 import styled from 'styled-components/native';
-import {TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
 import {moderateScale} from 'src/helper';
 
 export const Container: ComponentType<any> = styled.View`
@@ -40,4 +40,19 @@ export const Space: ComponentType<any> = styled.View`
 `;
 export const QtyContainer: ComponentType<any> = styled.View`
   flex-direction: row;
+`;
+export const TitleContainer: ComponentType<any> = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const ArrowButton: ComponentType<any> = styled.TouchableOpacity``;
+export const ArrowIcon: ComponentType<any> = styled(Image).attrs(props => ({
+  ...props,
+  source: props.showSearch
+    ? require('src/assets/up-arrow.png')
+    : require('src/assets/down-arrow.png'),
+}))`
+  width: ${moderateScale(17)}px;
+  height: ${moderateScale(17)}px;
 `;

@@ -17,7 +17,7 @@ import {
 import {GeolocationUtility} from 'src/util';
 import {getHotelsNearYou} from 'src/reducers/hotelsReducer';
 import {connect} from 'react-redux';
-import {getBoundingBox} from 'src/helper';
+import {getBoundingBox, SAMPLE_HOTELS} from 'src/helper';
 import {Header} from './components';
 import moment from 'moment';
 import {useNavigation} from '@react-navigation/native';
@@ -105,7 +105,11 @@ const MainComponent = (props: PropsType): React$Node => {
     }
     return (
       <GridContainer
-        data={hotels?.hotelsNearYou?.result ? hotels.hotelsNearYou.result : []}
+        data={
+          hotels?.hotelsNearYou?.result
+            ? hotels.hotelsNearYou.result
+            : SAMPLE_HOTELS
+        }
         renderItem={({item}) => (
           <ContentContainer
             onPress={() =>
